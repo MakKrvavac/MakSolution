@@ -1,0 +1,39 @@
+﻿version: '3.8'
+
+services:
+  azure-db:
+    image: mcr.microsoft.com/azure-sql-edge:1.0.4
+    container_name: azure-db
+    environment:
+      ACCEPT_EULA: '1'
+      MSSQL_SA_USER: 'sa'
+      MSSQL_SA_PASSWORD: 'thisIsAStrongPW!'
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: [ "CMD-SHELL", "sqlcmd -S localhost -U sa -P thisIsAStrongPW! -Q 'SELECT 1'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+    command: "azurite-blob --blobHost 0.0.0.0 --blobPort 10000"
+    volumes:
+      - ./data:/data
+  multi-db-postgres:
+    image: postgres:latest
+    container_name: multi-db-postgres
+    environment:
+      POSTGRES_USER: postgresuser
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: makDb, authDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

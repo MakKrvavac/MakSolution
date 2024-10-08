@@ -1,0 +1,162 @@
+= UML
+
+[plantuml,architecture-components,svg,subs=+attributes+]
+----
+@startuml
+
+entity Project {
+- GUID id
+- String title
+- String description
+- Date start
+- Date end
+- String prototypeLink
+- String designLink
+- String githubLink
+- String liveDemoLink
++ updateProject()
++ deleteProject()
+}
+
+enum ProjectProgress {
+# REFINEMENT
+# PROTOTYPING
+# DESIGNING
+# UX
+# FEEDBACK
+# DEVELOPMENT
+# TESTING
+# ROLLOUT
+# LIVE
+}
+
+entity Task {
+- GUID id
+- String title
+- String description
+- User responsibleUser
+- Double storyPoints
+- Epic epic
++ createTask()
++ deleteTask()
+}
+
+entity Epic {
+- GUID id
+- String name
+}
+
+enum TaskProgress {
+# TODO
+# IN PROGRESS
+# TEST
+# DONE
+}
+
+entity Calendar {
+}
+
+entity CalendarEntry{
+- GUID id
+- String title
+- String description
+- DateTime dateTime
+}
+
+entity Deadline {
+}
+
+entity Meeting {
+- String place
+- String link
++ createMeeting()
++ updateMeeting()
++ deleteMeeting()
+}
+
+entity User {
+- GUID id
+- String surName
+- String name
+- String email
+- Role role
+- Byte password
++ login()
++ logout()
++ updateProfile()
++ deleteProfile()
++ createMeeting()
++ updateMeeting()
++ deleteMeeting()
+}
+
+class Customer {
+- String companyName
++ sendFeedback()
+}
+
+class Admin {
++ addUser()
++ deleteUser()
++ updateUser()
++ addProject()
++ deleteProject()
++ updateProject()
+}
+
+entity Message {
+- GUID id
+- GUID sender
+- GUID receiver
+- String text
+- DateTime timestamp
++ sendMessage()
++ updateMessage()
++ getMessages()
+}
+
+entity File {
+- GUID id
+- String name
+- String path
+- Long version
+- DateTime timestamp
+- GUID blobStorageId
++ download()
++ upload()
+}
+
+entity Notification {
+- GUID id
+- String title
+- String description
+}
+
+entity Feedback {
+- GUID id
+- String feedback
+}
+
+Project "1" *--- "0..*" Task
+Project *-- "0..*" File
+Project -> ProjectProgress
+Project <-- Feedback
+
+Epic *- "0..*" Task
+Task --> TaskProgress
+Task <-- Feedback
+
+CalendarEntry <|-- Deadline
+CalendarEntry <|-- Meeting
+
+Calendar *-- "1..*" CalendarEntry
+
+Meeting *-- "1..*" User
+
+User <|-- Customer
+User <|-- Admin
+User -> "0..*" Notification
+User ----> Feedback
+
+@enduml
+----
