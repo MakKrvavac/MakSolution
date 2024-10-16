@@ -1,100 +1,45 @@
-
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+using System.Net;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-using Xunit;
-using MakApi.Models.Dtos;
+using MakApi.Models.Domain;
+using MakTest.Fixtures;
 
-namespace MakTest
+namespace MakTest;
 
+public class ProjectsControllerTests(WebApplicationFactoryFixture factory) : AbstractIntegrationTest(factory)
 {
-    public class ProjectsControllerTests : IClassFixture<WebApplicationFactory<Program>>
+    [Fact]
+    public async void TestDatabase_GetAll()
     {
-        private readonly HttpClient _client;
+        // Arrange 
 
-        public ProjectsControllerTests(WebApplicationFactory<Program> factory)
-        {
-            _client = factory.CreateClient();
-        }
+        // Act
+        var response = await Client.GetAsync(HttpHelper.Urls.GetAllProjects);
+        var result = await response.Content.ReadFromJsonAsync<List<Project>>();
 
-        [Fact]
-        public async Task GetAll_ReturnsOkResponse()
-        {
-            // Act
-            var response = await _client.GetAsync("/Projects");
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-            var projects = await response.Content.ReadFromJsonAsync<List<ProjectDto>>();
-            Assert.NotNull(projects);
-        }
+        result.Count.Should().Be(Factory.InitialProjectCount);
+        result.Should().BeEquivalentTo(DataFixture.GetProjects(Factory.InitialProjectCount),
+            options => options.Excluding(t => t.Id));
+    }
 
-        [Fact]
-        public async Task GetById_ReturnsNotFound_ForInvalidId()
-        {
-            // Act
-            var response = await _client.GetAsync("/Projects/00000000-0000-0000-0000-000000000000");
+    [Fact]
+    public async void TestDatabase_Create()
+    {
+        // Arrange
+        var newProject = DataFixture.GetProject();
 
-            // Assert
-            Assert.Equal(System.Net.HttpStatusCode.NotFound, response.StatusCode);
-        }
+        // Act
+        var request =
+            await Client.PostAsync(HttpHelper.Urls.CreateProject, HttpHelper.GetStringContent(newProject));
+        var response = await Client.GetAsync(HttpHelper.Urls.GetAllProjects);
+        var result = await response.Content.ReadFromJsonAsync<List<Project>>();
 
-        [Fact]
-        public async Task Create_ReturnsCreatedResponse()
-        {
-            // Arrange
-            var newProject = new CreateProjectDto
-            {
-                Title = "New Project",
-                Description = "Description of the new project",
-                Start = new DateOnly(2023, 5, 17),
-                End = new DateOnly(2023, 6, 17)
-            };
+        // Assert
+        request.StatusCode.Should().Be(HttpStatusCode.Created);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            // Act
-            var response = await _client.PostAsJsonAsync("/Projects", newProject);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-            var createdProject = await response.Content.ReadFromJsonAsync<ProjectDto>();
-            Assert.NotNull(createdProject);
-            Assert.Equal(newProject.Title, createdProject.Title);
-        }
-
-        [Fact]
-        public async Task Update_ReturnsOkResponse()
-        {
-            // Arrange
-            var updateProject = new UpdateProjectDto
-            {
-                Title = "Updated Project",
-                Description = "Updated description",
-                Start = new DateOnly(2023, 5, 17),
-                End = new DateOnly(2023, 6, 17)
-            };
-
-            // Act
-            var response = await _client.PutAsJsonAsync("/Projects/00000000-0000-0000-0000-000000000001", updateProject);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-            var updatedProject = await response.Content.ReadFromJsonAsync<ProjectDto>();
-            Assert.NotNull(updatedProject);
-            Assert.Equal(updateProject.Title, updatedProject.Title);
-        }
-
-        [Fact]
-        public async Task Delete_ReturnsNoContentResponse()
-        {
-            // Act
-            var response = await _client.DeleteAsync("/Projects/00000000-0000-0000-0000-000000000001");
-
-            // Assert
-            Assert.Equal(System.Net.HttpStatusCode.NoContent, response.StatusCode);
-        }
+        result.Count.Should().Be(Factory.InitialProjectCount + 1);
     }
 }

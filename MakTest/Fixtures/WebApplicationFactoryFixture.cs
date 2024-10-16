@@ -30,29 +30,25 @@ public class WebApplicationFactoryFixture : WebApplicationFactory<Program>, IAsy
     }
 
 
-    public async Task InitializeDatabaseAsync()
+    private async Task InitializeDatabaseAsync()
     {
-        using (var scope = Services.CreateScope())
-        {
-            var scopedServices = scope.ServiceProvider;
-            var cntx = scopedServices.GetRequiredService<MakDbContext>();
+        using var scope = Services.CreateScope();
+        var scopedServices = scope.ServiceProvider;
+        var cntx = scopedServices.GetRequiredService<MakDbContext>();
 
-            await cntx.Database.EnsureCreatedAsync();
-            await cntx.Projects.AddRangeAsync(DataFixture.GetProjects(InitialProjectCount));
-            await cntx.SaveChangesAsync();
-        }
+        await cntx.Database.EnsureCreatedAsync();
+        await cntx.Projects.AddRangeAsync(DataFixture.GetProjects(InitialProjectCount));
+        await cntx.SaveChangesAsync();
     }
 
-    public async Task ClearDatabaseAsync()
+    private async Task ClearDatabaseAsync()
     {
-        using (var scope = Services.CreateScope())
-        {
-            var scopedServices = scope.ServiceProvider;
-            var cntx = scopedServices.GetRequiredService<MakDbContext>();
+        using var scope = Services.CreateScope();
+        var scopedServices = scope.ServiceProvider;
+        var cntx = scopedServices.GetRequiredService<MakDbContext>();
 
-            cntx.Projects.RemoveRange(cntx.Projects);
-            await cntx.SaveChangesAsync();
-        }
+        cntx.Projects.RemoveRange(cntx.Projects);
+        await cntx.SaveChangesAsync();
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)

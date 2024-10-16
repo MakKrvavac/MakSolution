@@ -27,4 +27,10 @@ internal class HttpHelper
         public const string UpdateProject = "/api/projects/{0}";
         public const string DeleteProject = "/api/projects/{0}";
     }
+
+    internal static class Credentials
+    {
+        public const string Username = "testuser";
+        public const string Password = "test@123";
+    }
 }

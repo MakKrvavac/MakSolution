@@ -9,6 +9,7 @@
     &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.TestEnvironment.TestDatabase_GetAll&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.TestEnvironmentTestContainer.TestDatabase_GetAll&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.TestEnvironmentTestContainer.TestDatabase_Create&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.ProjectsControllerTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	
