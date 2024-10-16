@@ -1,19 +1,17 @@
 using MakApi.Data;
 using MakApi.Models.Dtos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task = MakApi.Models.Domain.Task;
 
 namespace MakApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class TasksController : Controller
 {
-    
     private readonly MakDbContext _dbContext;
     private readonly ILogger<TasksController> _logger;
-    
+
     public TasksController(MakDbContext dbContext, ILogger<TasksController> logger)
     {
         _dbContext = dbContext;
@@ -21,14 +19,14 @@ public class TasksController : Controller
     }
 
     [HttpGet]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetAll()
     {
         var domainTasks = _dbContext.Tasks.ToList();
         var dtoTasks = new List<TaskDto>();
 
         foreach (var task in domainTasks)
-            dtoTasks.Add(new TaskDto()
+            dtoTasks.Add(new TaskDto
             {
                 Id = task.Id,
                 Title = task.Title,
@@ -43,19 +41,18 @@ public class TasksController : Controller
 
         return Ok(dtoTasks);
     }
-    
+
     [HttpGet("{projectId:guid}")]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetAllInProject(Guid projectId)
     {
         var domainProject = _dbContext.Projects.Find(projectId);
-        
+
         var domainTasks = domainProject.Tasks;
         var dtoTasks = new List<TaskDto>();
 
         foreach (var task in domainTasks)
-        {
-            dtoTasks.Add(new TaskDto()
+            dtoTasks.Add(new TaskDto
             {
                 Id = task.Id,
                 Title = task.Title,
@@ -67,13 +64,12 @@ public class TasksController : Controller
                 Epic = task.Epic,
                 TaskProgress = task.TaskProgress
             });
-        }
 
         return Ok(dtoTasks);
     }
-    
+
     [HttpGet("{id:guid}")]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetById(Guid id)
     {
         var domainTask = _dbContext.Tasks.Find(id);
@@ -95,9 +91,9 @@ public class TasksController : Controller
 
         return Ok(dtoTask);
     }
-    
+
     [HttpPost]
-    [Authorize(Roles = "Writer")]
+    //[Authorize(Roles = "Writer")]
     public IActionResult Create([FromBody] CreateTaskDto createTaskDto)
     {
         var domainTask = new Task
@@ -106,15 +102,15 @@ public class TasksController : Controller
             Description = createTaskDto.Description,
             ResponsibleUserId = createTaskDto.ResponsibleUserId,
             StoryPoints = createTaskDto.StoryPoints,
-            EpicId = createTaskDto.EpicId,
+            EpicId = createTaskDto.EpicId
         };
 
         _dbContext.Tasks.Add(domainTask);
         _dbContext.SaveChanges();
-        
+
         var domainProject = _dbContext.Projects.Find(createTaskDto.ProjectId);
         _logger.LogInformation($"Project: {domainProject.Title}");
-        
+
         domainProject.Tasks.Add(domainTask);
         _dbContext.SaveChanges();
 
@@ -128,12 +124,12 @@ public class TasksController : Controller
             EpicId = domainTask.EpicId,
             TaskProgress = domainTask.TaskProgress
         };
-        
+
         return CreatedAtAction(nameof(GetById), new { id = dtoTask.Id }, dtoTask);
     }
-    
+
     [HttpPut("{id:guid}")]
-    [Authorize]
+    //[Authorize]
     public IActionResult Update(Guid id, [FromBody] UpdateTaskDto updateTaskDto)
     {
         var domainTask = _dbContext.Tasks.Find(id);
@@ -161,9 +157,9 @@ public class TasksController : Controller
 
         return Ok(dtoTask);
     }
-    
+
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "Writer")]
+    //[Authorize(Roles = "Writer")]
     public IActionResult Delete(Guid id)
     {
         var domainTask = _dbContext.Tasks.Find(id);
@@ -175,5 +171,4 @@ public class TasksController : Controller
 
         return NoContent();
     }
-    
 }

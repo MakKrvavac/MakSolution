@@ -1,7 +1,15 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AEntityFrameworkQueryableExtensions_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003Fc69576b4a074ad2839225611609498e344b7e2819997af48dbb2d2f8257f3_003FEntityFrameworkQueryableExtensions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AHttpClient_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F60038225224a9318597b3232280390933d3c3fe85d9ed859a7e4825915eb1c_003FHttpClient_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6395ee2b_002Dfb4b_002D48e3_002Da0f3_002D53b40805ac0e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetAll_ReturnsOkResponse" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AHttpContent_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F5a55e5df9328b51021ba85b8f12ff49eca8772dba9772c0d61d5e28edf255c_003FHttpContent_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATask_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F35f3a54f5acb408a3e219b2de039f1a39557b7e4515f11238cba07b60c0ce_003FTask_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8c37bcf_002D0f10_002D40a1_002Da689_002D462a91cd5f0f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestInMemory" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.ProjectsControllerTests.GetAll_ReturnsOkResponse&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.InMemoryDatabase&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.TestEnvironment.TestDatabase_GetAll&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.TestEnvironmentTestContainer.TestDatabase_GetAll&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::DDFBFFBF-33D6-4FFC-9740-5BCB30C56E9C::net8.0::MakTest.Common.TestEnvironmentTestContainer.TestDatabase_Create&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	
+	</wpf:ResourceDictionary>

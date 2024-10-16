@@ -261,3 +261,4 @@
 /Users/mak.krvavac/Documents/Git/MakSolution/MakApi/obj/Debug/net8.0/MakApi.pdb
 /Users/mak.krvavac/Documents/Git/MakSolution/MakApi/obj/Debug/net8.0/MakApi.genruntimeconfig.cache
 /Users/mak.krvavac/Documents/Git/MakSolution/MakApi/obj/Debug/net8.0/ref/MakApi.dll
+/Users/mak.krvavac/Documents/Git/MakSolution/MakApi/obj/Debug/net8.0/MakApi.sourcelink.json

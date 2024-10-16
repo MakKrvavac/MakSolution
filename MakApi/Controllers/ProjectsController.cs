@@ -1,13 +1,12 @@
 using MakApi.Data;
 using MakApi.Models.Domain;
 using MakApi.Models.Dtos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MakApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProjectsController : ControllerBase
 {
     private readonly MakDbContext _dbContext;
@@ -18,7 +17,7 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetAll()
     {
         var domainProjects = _dbContext.Projects.ToList();
@@ -48,7 +47,7 @@ public class ProjectsController : ControllerBase
 
     [HttpGet]
     [Route("{id:guid}")]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetById([FromRoute] Guid id)
     {
         var domainProject = _dbContext.Projects.Find(id);
@@ -78,7 +77,7 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Writer")]
+    //[Authorize(Roles = "Writer")]
     public IActionResult Create([FromBody] CreateProjectDto createProjectDto)
     {
         var domainProject = new Project
@@ -106,7 +105,7 @@ public class ProjectsController : ControllerBase
 
     [HttpPut]
     [Route("{id:guid}")]
-    [Authorize(Roles = "Writer")]
+    //[Authorize(Roles = "Writer")]
     public IActionResult Update([FromRoute] Guid id, [FromBody] UpdateProjectDto updateProjectDto)
     {
         var domainProject = _dbContext.Projects.Find(id);
@@ -150,7 +149,7 @@ public class ProjectsController : ControllerBase
 
     [HttpDelete]
     [Route("{id:guid}")]
-    [Authorize(Roles = "Writer")]
+    //[Authorize(Roles = "Writer")]
     public IActionResult Delete([FromRoute] Guid id)
     {
         var domainProject = _dbContext.Projects.Find(id);

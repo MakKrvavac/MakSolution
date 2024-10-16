@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MakTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5de817cbedb613ca4b417c91d9bf3405e624215a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbbb6222d93b71592103855cbf00bf06f88760d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("MakTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MakTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
